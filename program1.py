@@ -4,10 +4,14 @@ class Solution(object):
         :type s: str
         :rtype: bool
         """
-        pass
-    
-
-
-
-  
-
+        stack = []
+        opening = set('({[')
+        mapping = {")": "(", "}": "{", "]": "["}
+        for char in s:
+            if char in opening:
+                stack.append(char)
+            elif stack and mapping[char] == stack[-1]:
+                stack.pop()
+            else:
+                return False
+        return not stack
